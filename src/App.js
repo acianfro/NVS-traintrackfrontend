@@ -6,12 +6,6 @@ import './App.css';
 // Import all components
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import WorkerOnboarding from './components/workers/WorkerOnboarding';
-import WorkerProfiles from './components/workers/WorkerProfiles';
-import TrainingLog from './components/training/TrainingLog';
-import PublicPortal from './components/public/PublicPortal';
-import Reports from './components/reports/Reports';
-import Administration from './components/admin/Administration';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 
