@@ -1,4 +1,4 @@
-// components/workers/WorkerOnboarding.jsx
+
 import React, { useState } from 'react';
 
 const WorkerOnboarding = () => {
