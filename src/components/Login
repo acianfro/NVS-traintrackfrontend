@@ -1,0 +1,8 @@
+// src/Login.js (in root src folder first)
+import React from 'react';
+
+const Login = () => {
+  return <div>Simple Login Test</div>;
+};
+
+export default Login;
