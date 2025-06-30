@@ -1,4 +1,4 @@
-// components/public/PublicPortal.jsx
+
 import React, { useState } from 'react';
 
 const PublicPortal = () => {
