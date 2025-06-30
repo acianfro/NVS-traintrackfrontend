@@ -1,16 +1,11 @@
-
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  // Mock users for demo
   const mockUsers = [
     {
       id: 1,
@@ -29,141 +24,131 @@ const Login = ({ onLogin }) => {
       role: 'contractor',
       title: 'HSE Representative',
       company: 'Acme Construction'
-    },
-    {
-      id: 3,
-      email: 'admin@traintrack.com',
-      password: 'demo123',
-      name: 'Lisa Chen',
-      role: 'admin',
-      title: 'System Administrator',
-      company: 'Main Organization'
     }
   ];
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError('');
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    // Simulate API call delay
-    setTimeout(() => {
-      const user = mockUsers.find(
-        u => u.email === formData.email && u.password === formData.password
-      );
-
-      if (user) {
-        onLogin(user);
-      } else {
-        setError('Invalid email or password. Try: sarah@traintrack.com / demo123');
-      }
-      setLoading(false);
-    }, 1000);
-  };
-
-  const quickLogin = (userEmail) => {
-    const user = mockUsers.find(u => u.email === userEmail);
-    if (user) onLogin(user);
+    const user = mockUsers.find(
+      u => u.email === formData.email && u.password === formData.password
+    );
+    
+    if (user) {
+      onLogin(user);
+    } else {
+      alert('Invalid credentials. Try: sarah@traintrack.com / demo123');
+    }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-background">
-        <div className="login-overlay"></div>
-      </div>
-      
-      <div className="login-content">
-        <div className="login-form-container">
-          <div className="login-header">
-            <div className="logo">
-              <div className="logo-icon">🏗️</div>
-              <h1>Train-Track</h1>
-            </div>
-            <p className="login-subtitle">EHS Training Management System</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="login-form">
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                required
-              />
-            </div>
-
-            {error && <div className="error-message">{error}</div>}
-
-            <button type="submit" className="login-button" disabled={loading}>
-              {loading ? 'Signing In...' : 'Sign In'}
-            </button>
-          </form>
-
-          <div className="demo-accounts">
-            <p className="demo-title">Demo Accounts:</p>
-            <div className="demo-buttons">
-              <button 
-                onClick={() => quickLogin('sarah@traintrack.com')}
-                className="demo-button"
-              >
-                Safety Manager
-              </button>
-              <button 
-                onClick={() => quickLogin('mike@acme.com')}
-                className="demo-button"
-              >
-                Contractor
-              </button>
-              <button 
-                onClick={() => quickLogin('admin@traintrack.com')}
-                className="demo-button"
-              >
-                Administrator
-              </button>
-            </div>
-          </div>
-
-          <div className="public-access">
-            <a href="/public" className="public-link">
-              🔓 Public Training Verification Portal
-            </a>
-          </div>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px'
+    }}>
+      <div style={{
+        background: 'white',
+        padding: '40px',
+        borderRadius: '12px',
+        width: '100%',
+        maxWidth: '400px',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+      }}>
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+          <h1 style={{ fontSize: '32px', marginBottom: '8px' }}>🏗️ Train-Track</h1>
+          <p style={{ color: '#718096' }}>EHS Training Management System</p>
         </div>
 
-        <div className="login-info">
-          <h2>Streamline Your Safety Training</h2>
-          <ul>
-            <li>✓ Digital worker profiles and training records</li>
-            <li>✓ Mobile-friendly training logging</li>
-            <li>✓ Real-time compliance tracking</li>
-            <li>✓ Automated expiration alerts</li>
-            <li>✓ Public verification portal</li>
-          </ul>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
+              Email Address
+            </label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              placeholder="Enter your email"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '2px solid #e2e8f0',
+                borderRadius: '6px',
+                fontSize: '14px'
+              }}
+              required
+            />
+          </div>
+
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
+              Password
+            </label>
+            <input
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              placeholder="Enter your password"
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '2px solid #e2e8f0',
+                borderRadius: '6px',
+                fontSize: '14px'
+              }}
+              required
+            />
+          </div>
+
+          <button 
+            type="submit"
+            style={{
+              width: '100%',
+              padding: '16px',
+              background: '#667eea',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            Sign In
+          </button>
+        </form>
+
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <p style={{ fontSize: '14px', color: '#4a5568', marginBottom: '12px' }}>Demo Accounts:</p>
+          <button 
+            onClick={() => setFormData({email: 'sarah@traintrack.com', password: 'demo123'})}
+            style={{
+              padding: '8px 16px',
+              background: '#f7fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '6px',
+              margin: '0 4px',
+              cursor: 'pointer'
+            }}
+          >
+            Safety Manager
+          </button>
+          <button 
+            onClick={() => setFormData({email: 'mike@acme.com', password: 'demo123'})}
+            style={{
+              padding: '8px 16px',
+              background: '#f7fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '6px',
+              margin: '0 4px',
+              cursor: 'pointer'
+            }}
+          >
+            Contractor
+          </button>
         </div>
       </div>
     </div>
