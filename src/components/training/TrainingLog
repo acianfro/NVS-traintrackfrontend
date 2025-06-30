@@ -1,4 +1,4 @@
-// components/training/TrainingLog.jsx
+
 import React, { useState } from 'react';
 
 const TrainingLog = () => {
