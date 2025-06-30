@@ -23,10 +23,11 @@ function App() {
         <p>🚀 Ready to add Train-Track components...</p>
         
         <div style={{ marginTop: '20px' }}>
-          <h3>Next Steps:</h3>
-          <p>1. ✅ Basic React app deployed</p>
-          <p>2. 🔄 Adding components...</p>
-          <p>3. 🎯 Full Train-Track app</p>
+          <h3>Development Progress:</h3>
+          <p>✅ Basic React app structure</p>
+          <p>✅ Vercel deployment pipeline</p>
+          <p>🔄 Adding components step by step</p>
+          <p>🎯 Full Train-Track features coming soon</p>
         </div>
       </div>
     </div>
