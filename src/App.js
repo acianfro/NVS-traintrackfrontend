@@ -1,9 +1,9 @@
-// App.jsx - Main Application Component
+// App.js - Complete Train-Track Application
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
-// Import all components
+// Import components (these should match your uploaded files)
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import WorkerOnboarding from './components/workers/WorkerOnboarding';
