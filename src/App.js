@@ -1,96 +1,28 @@
-// App.js - Complete Train-Track Application
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
-
-// Import components (these should match your uploaded files)
-import Login from './components/auth/Login';
-import Dashboard from './components/dashboard/Dashboard';
-import WorkerOnboarding from './components/workers/WorkerOnboarding';
-import WorkerProfiles from './components/workers/WorkerProfiles';
-import TrainingLog from './components/training/TrainingLog';
-import PublicPortal from './components/public/PublicPortal';
-import Reports from './components/reports/Reports';
-import Administration from './components/admin/Administration';
-import Navbar from './components/layout/Navbar';
-import Sidebar from './components/layout/Sidebar';
-
-// Mock authentication context
-const AuthContext = React.createContext();
+import React from 'react';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // Mock authentication check
-  useEffect(() => {
-    const savedUser = localStorage.getItem('trainTrackUser');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setLoading(false);
-  }, []);
-
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem('trainTrackUser', JSON.stringify(userData));
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('trainTrackUser');
-  };
-
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-spinner"></div>
-        <p>Loading Train-Track...</p>
-      </div>
-    );
-  }
-
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      <Router>
-        <div className="app">
-          {user ? (
-            <div className="app-layout">
-              <Navbar 
-                user={user} 
-                logout={logout}
-                toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-              />
-              <div className="app-content">
-                <Sidebar 
-                  isOpen={sidebarOpen}
-                  userRole={user.role}
-                  onClose={() => setSidebarOpen(false)}
-                />
-                <main className="main-content">
-                  <Routes>
-                    <Route path="/dashboard" element={<Dashboard user={user} />} />
-                    <Route path="/workers/onboard" element={<WorkerOnboarding />} />
-                    <Route path="/workers/profiles" element={<WorkerProfiles />} />
-                    <Route path="/training/log" element={<TrainingLog />} />
-                    <Route path="/reports" element={<Reports />} />
-                    <Route path="/admin" element={<Administration userRole={user.role} />} />
-                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                  </Routes>
-                </main>
-              </div>
-            </div>
-          ) : (
-            <Routes>
-              <Route path="/public" element={<PublicPortal />} />
-              <Route path="/login" element={<Login onLogin={login} />} />
-              <Route path="/" element={<Navigate to="/login" replace />} />
-            </Routes>
-          )}
-        </div>
-      </Router>
-    </AuthContext.Provider>
+    <div style={{ 
+      padding: '40px', 
+      fontFamily: 'Arial, sans-serif',
+      textAlign: 'center',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      minHeight: '100vh',
+      color: 'white'
+    }}>
+      <h1>🏗️ Train-Track</h1>
+      <h2>EHS Training Management System</h2>
+      <div style={{ 
+        background: 'rgba(255,255,255,0.1)', 
+        padding: '20px', 
+        borderRadius: '10px',
+        marginTop: '20px'
+      }}>
+        <p>✅ React application is working!</p>
+        <p>🔧 Reset to working state</p>
+        <p>🎯 Ready to add components step by step</p>
+      </div>
+    </div>
   );
 }
 
