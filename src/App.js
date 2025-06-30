@@ -1,58 +1,96 @@
-import React, { useState } from 'react';
+// App.jsx - Main Application Component
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+
+// Import all components
 import Login from './components/auth/Login';
+import Dashboard from './components/dashboard/Dashboard';
+import WorkerOnboarding from './components/workers/WorkerOnboarding';
+import WorkerProfiles from './components/workers/WorkerProfiles';
+import TrainingLog from './components/training/TrainingLog';
+import PublicPortal from './components/public/PublicPortal';
+import Reports from './components/reports/Reports';
+import Administration from './components/admin/Administration';
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
+
+// Mock authentication context
+const AuthContext = React.createContext();
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Mock authentication check
+  useEffect(() => {
+    const savedUser = localStorage.getItem('trainTrackUser');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+    setLoading(false);
+  }, []);
 
   const login = (userData) => {
     setUser(userData);
+    localStorage.setItem('trainTrackUser', JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('trainTrackUser');
   };
 
-  return (
-    <Router>
-      <div className="app">
-        {user ? (
-          // Logged in - show dashboard (simple for now)
-          <div style={{ 
-            padding: '40px', 
-            fontFamily: 'Arial, sans-serif',
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            minHeight: '100vh',
-            color: 'white'
-          }}>
-            <h1>🏗️ Train-Track Dashboard</h1>
-            <h2>Welcome, {user.name}!</h2>
-            <p>Role: {user.title}</p>
-            <button 
-              onClick={logout}
-              style={{
-                padding: '12px 24px',
-                background: 'rgba(255,255,255,0.2)',
-                color: 'white',
-                border: '1px solid rgba(255,255,255,0.3)',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                marginTop: '20px'
-              }}
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          // Not logged in - show login
-          <Routes>
-            <Route path="/login" element={<Login onLogin={login} />} />
-            <Route path="/" element={<Navigate to="/login" replace />} />
-          </Routes>
-        )}
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+        <p>Loading Train-Track...</p>
       </div>
-    </Router>
+    );
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      <Router>
+        <div className="app">
+          {user ? (
+            <div className="app-layout">
+              <Navbar 
+                user={user} 
+                logout={logout}
+                toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+              />
+              <div className="app-content">
+                <Sidebar 
+                  isOpen={sidebarOpen}
+                  userRole={user.role}
+                  onClose={() => setSidebarOpen(false)}
+                />
+                <main className="main-content">
+                  <Routes>
+                    <Route path="/dashboard" element={<Dashboard user={user} />} />
+                    <Route path="/workers/onboard" element={<WorkerOnboarding />} />
+                    <Route path="/workers/profiles" element={<WorkerProfiles />} />
+                    <Route path="/training/log" element={<TrainingLog />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/admin" element={<Administration userRole={user.role} />} />
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  </Routes>
+                </main>
+              </div>
+            </div>
+          ) : (
+            <Routes>
+              <Route path="/public" element={<PublicPortal />} />
+              <Route path="/login" element={<Login onLogin={login} />} />
+              <Route path="/" element={<Navigate to="/login" replace />} />
+            </Routes>
+          )}
+        </div>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 
