@@ -1,4 +1,4 @@
-// components/workers/WorkerProfiles.js
+// components/workers/WorkerProfiles.jsx
 import React, { useState } from 'react';
 
 const WorkerProfiles = () => {
@@ -106,15 +106,16 @@ const WorkerProfiles = () => {
   ]);
 
   const filteredWorkers = workers.filter(worker => {
-    const matchesSearch = worker.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         worker.workerId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         worker.company.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = !selectedCategory || 
-                           worker.trainingRecords.some(record => 
-                             record.category === selectedCategory
-                           );
-    
+    const matchesSearch = 
+      worker.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      worker.workerId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      worker.company.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory = !selectedCategory ||
+      worker.trainingRecords.some(record =>
+        record.category === selectedCategory
+      );
+
     return matchesSearch && matchesCategory;
   });
 
@@ -125,7 +126,7 @@ const WorkerProfiles = () => {
       'current': { text: '✓ Current', className: 'status-current' },
       'expired': { text: '✗ Expired', className: 'status-expired' }
     };
-    
+
     return badges[status] || { text: status, className: 'status-unknown' };
   };
 
@@ -138,13 +139,13 @@ const WorkerProfiles = () => {
     return (
       <div className="worker-profiles">
         <div className="detail-view">
-          <button 
-            className="back-button" 
+          <button
+            className="back-button"
             onClick={() => setShowWorkerDetail(false)}
           >
             ← Back to Worker Profiles
           </button>
-          
+
           <div className="profile-header">
             <div className="profile-info">
               <h2>{selectedWorker.name} ({selectedWorker.workerId})</h2>
@@ -213,7 +214,7 @@ const WorkerProfiles = () => {
                 <div>Status</div>
                 <div>Actions</div>
               </div>
-              
+
               {selectedWorker.trainingRecords.map(record => {
                 const badge = getStatusBadge(record.status);
                 return (
@@ -224,7 +225,7 @@ const WorkerProfiles = () => {
                     </div>
                     <div>{new Date(record.completionDate).toLocaleDateString()}</div>
                     <div>
-                      {record.expirationDate 
+                      {record.expirationDate
                         ? new Date(record.expirationDate).toLocaleDateString()
                         : 'No Expiration'
                       }
@@ -266,8 +267,8 @@ const WorkerProfiles = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        
-        <select 
+
+        <select
           className="filter-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -320,13 +321,13 @@ const WorkerProfiles = () => {
             </div>
 
             <div className="worker-card-actions">
-              <button 
+              <button
                 className="btn btn-primary"
                 onClick={() => alert('Add Training Record functionality')}
               >
                 Add Training Record
               </button>
-              <button 
+              <button
                 className="btn btn-secondary"
                 onClick={() => showWorkerDetails(worker)}
               >
