@@ -139,7 +139,7 @@ const WorkerProfiles = () => {
     setSelectedWorker(null);
   };
 
-  // Render detail view
+  // Render detail view if a worker is selected
   if (showWorkerDetail && selectedWorker) {
     return (
       <div className="worker-profiles">
@@ -349,8 +349,7 @@ const WorkerProfiles = () => {
           <h3>No workers found</h3>
           <p>Try adjusting your search criteria or filters.</p>
         </div>
-      </div>
-    )}
+      )}
     </div>
   );
 };
