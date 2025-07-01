@@ -1,4 +1,4 @@
-// components/workers/WorkerOnboarding.js
+// components/workers/WorkerOnboarding.jsx
 import React, { useState } from 'react';
 
 const WorkerOnboarding = () => {
@@ -124,7 +124,7 @@ const WorkerOnboarding = () => {
 
   const calculateExpirationDate = (trainingType, completionDate) => {
     const completion = new Date(completionDate);
-    
+
     // Training-specific expiration logic
     const expirationMonths = {
       'OSHA 30-Hour Construction': 36,
@@ -148,7 +148,7 @@ const WorkerOnboarding = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validate required fields
     if (!formData.fullName || !formData.department) {
       alert('Please fill in all required fields');
@@ -158,7 +158,7 @@ const WorkerOnboarding = () => {
     // Simulate saving worker
     console.log('Saving worker:', { ...formData, trainingRecords });
     alert('Worker profile created successfully!');
-    
+
     // Reset form
     setFormData({
       workerId: `ACM-${String(Math.floor(Math.random() * 9999)).padStart(4, '0')}`,
@@ -183,7 +183,7 @@ const WorkerOnboarding = () => {
         {/* Worker Information Section */}
         <div className="form-section">
           <h2>Worker Information</h2>
-          
+
           <div className="form-grid">
             <div className="form-group">
               <label htmlFor="workerId">Worker ID</label>
@@ -306,7 +306,7 @@ const WorkerOnboarding = () => {
           </div>
         </div>
 
-        {/* Training Records Section - PROPERLY PLACED INSIDE THE FORM */}
+        {/* Training Records Section */}
         <div className="form-section">
           <div className="section-header">
             <h2>Training Records and Current Certifications</h2>
@@ -489,7 +489,7 @@ const WorkerOnboarding = () => {
                           {newTraining.completionDate && newTraining.training && (
                             <p>
                               <strong>
-                                Expires: {calculateExpirationDate(newTraining.training, newTraining.completionDate) 
+                                Expires: {calculateExpirationDate(newTraining.training, newTraining.completionDate)
                                   ? new Date(calculateExpirationDate(newTraining.training, newTraining.completionDate)).toLocaleDateString()
                                   : 'No expiration'}
                               </strong>
