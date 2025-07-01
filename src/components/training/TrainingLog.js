@@ -1,4 +1,4 @@
-// components/training/TrainingLog.js
+// components/training/TrainingLog.jsx
 import React, { useState } from 'react';
 
 const TrainingLog = () => {
@@ -12,7 +12,7 @@ const TrainingLog = () => {
     location: '',
     notes: ''
   });
-  
+
   const [selectedWorkers, setSelectedWorkers] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -193,7 +193,7 @@ const TrainingLog = () => {
               {formData.training} training has been recorded for {selectedWorkers.length} workers.
               All worker profiles have been updated with the new certification.
             </p>
-            
+
             <div className="summary-card">
               <h3>Quick Summary</h3>
               <div className="summary-row">
@@ -252,7 +252,7 @@ const TrainingLog = () => {
       {currentStep === 1 && (
         <div className="step-content">
           <h2>Training Information</h2>
-          
+
           <div className="form-grid">
             <div className="form-group">
               <label htmlFor="category">Training Category *</label>
@@ -364,21 +364,21 @@ const TrainingLog = () => {
       {currentStep === 2 && (
         <div className="step-content">
           <h2>Select Workers ({selectedWorkers.length} selected)</h2>
-          
+
           <div className="quick-actions">
-            <button 
+            <button
               className="quick-action-btn"
               onClick={() => selectByDepartment('Heavy Equipment')}
             >
               👥 Heavy Equipment (2)
             </button>
-            <button 
+            <button
               className="quick-action-btn"
               onClick={() => selectByContractor('Acme Construction')}
             >
               🏢 Acme Construction (2)
             </button>
-            <button 
+            <button
               className="quick-action-btn"
               onClick={() => selectByDepartment('Safety')}
             >
@@ -397,8 +397,8 @@ const TrainingLog = () => {
 
             <div className="workers-list">
               {workers.map(worker => (
-                <div 
-                  key={worker.id} 
+                <div
+                  key={worker.id}
                   className={`worker-item ${selectedWorkers.find(w => w.id === worker.id) ? 'selected' : ''}`}
                   onClick={() => toggleWorkerSelection(worker)}
                 >
@@ -425,7 +425,7 @@ const TrainingLog = () => {
       {currentStep === 3 && (
         <div className="step-content">
           <h2>Upload Documents (Optional)</h2>
-          
+
           <div className="upload-section">
             <div className="upload-area">
               <div className="upload-placeholder">
@@ -455,7 +455,7 @@ const TrainingLog = () => {
       {currentStep === 4 && (
         <div className="step-content">
           <h2>Review Training Details</h2>
-          
+
           <div className="review-sections">
             <div className="review-section">
               <h3>Training Summary</h3>
@@ -505,7 +505,7 @@ const TrainingLog = () => {
             ← Back
           </button>
         )}
-        
+
         <div className="nav-spacer"></div>
 
         {currentStep < 4 ? (
