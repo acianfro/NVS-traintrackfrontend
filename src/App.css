@@ -38,7 +38,7 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 2rem;
+  padding: 1.5rem;
   margin-left: 280px;
   min-height: calc(100vh - 64px);
   background-color: #f7fafc;
@@ -640,7 +640,75 @@ body {
   justify-content: center;
 }
 
-/* ===== TRAINING LOG SPECIFIC ===== */
+/* ===== QUICK ACTIONS GRID ===== */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.quick-action-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.quick-action-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #3182ce;
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.quick-action-card.blue {
+  border-left: 4px solid #3182ce;
+}
+
+.quick-action-card.green {
+  border-left: 4px solid #38a169;
+}
+
+.quick-action-card.purple {
+  border-left: 4px solid #805ad5;
+}
+
+.quick-action-card.orange {
+  border-left: 4px solid #dd6b20;
+}
+
+.action-icon {
+  font-size: 2rem;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.action-content {
+  flex: 1;
+}
+
+.action-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.action-content p {
+  margin: 0;
+  color: #718096;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
 .progress-container {
   margin-bottom: 2rem;
 }
@@ -1226,7 +1294,7 @@ body {
 
 @media (max-width: 480px) {
   .main-content {
-    padding: 1rem;
+    padding: 0.75rem;
   }
   
   .page-header h1 {
