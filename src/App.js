@@ -4,6 +4,7 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
+import WorkerProfiles from './components/workers/WorkerProfiles';
 
 function App() {
   const [user, setUser] = useState(null);
