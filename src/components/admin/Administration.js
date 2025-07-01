@@ -1,3 +1,55 @@
+// components/admin/Administration.js
+import React, { useState } from 'react';
+
+const Administration = ({ userRole }) => {
+  const [activeSection, setActiveSection] = useState('training-library');
+  const [showModal, setShowModal] = useState(null);
+
+  // Mock data for administration
+  const [trainingLibrary] = useState([
+    {
+      id: 1,
+      name: 'OSHA 30-Hour Construction',
+      category: 'Safety Certifications',
+      deliveryMethod: 'In-Person',
+      duration: 30,
+      certificationLength: 36,
+      description: 'Comprehensive safety training for construction workers'
+    },
+    {
+      id: 2,
+      name: 'Crane Operation Certification',
+      category: 'Equipment Operation',
+      deliveryMethod: 'Third Party',
+      duration: 40,
+      certificationLength: 24,
+      description: 'Heavy equipment operation and safety protocols'
+    }
+  ]);
+
+  const [contractors] = useState([
+    {
+      id: 1,
+      name: 'Acme Construction',
+      license: 'CON-2024-0156',
+      contact: 'Mike Rodriguez',
+      email: 'mike@acmeconstruction.com',
+      trade: 'General Construction',
+      workers: 67,
+      status: 'Active'
+    },
+    {
+      id: 2,
+      name: 'PowerCorp',
+      license: 'ELC-2024-0089',
+      contact: 'Lisa Chen',
+      email: 'lisa@powercorp.com',
+      trade: 'Electrical',
+      workers: 34,
+      status: 'Active'
+    }
+  ]);
+
   const [users] = useState([
     {
       id: 1,
@@ -401,60 +453,16 @@
       </div>
 
       <div className="admin-content">
-        {activeSection === 'training-library' && renderTrainingLibrary(// components/admin/Administration.js
-import React, { useState } from 'react';
+        {activeSection === 'training-library' && renderTrainingLibrary()}
+        {activeSection === 'contractors' && renderContractors()}
+        {activeSection === 'users' && renderUsers()}
+        {activeSection === 'bulk-upload' && renderBulkUpload()}
+        {activeSection === 'categories' && renderCategories()}
+      </div>
 
-const Administration = ({ userRole }) => {
-  const [activeSection, setActiveSection] = useState('training-library');
-  const [showModal, setShowModal] = useState(null);
+      {renderModal()}
+    </div>
+  );
+};
 
-  // Mock data for administration
-  const [trainingLibrary] = useState([
-    {
-      id: 1,
-      name: 'OSHA 30-Hour Construction',
-      category: 'Safety Certifications',
-      deliveryMethod: 'In-Person',
-      duration: 30,
-      certificationLength: 36,
-      description: 'Comprehensive safety training for construction workers'
-    },
-    {
-      id: 2,
-      name: 'Crane Operation Certification',
-      category: 'Equipment Operation',
-      deliveryMethod: 'Third Party',
-      duration: 40,
-      certificationLength: 24,
-      description: 'Heavy equipment operation and safety protocols'
-    }
-  ]);
-
-  const [contractors] = useState([
-    {
-      id: 1,
-      name: 'Acme Construction',
-      license: 'CON-2024-0156',
-      contact: 'Mike Rodriguez',
-      email: 'mike@acmeconstruction.com',
-      trade: 'General Construction',
-      workers: 67,
-      status: 'Active'
-    },
-    {
-      id: 2,
-      name: 'PowerCorp',
-      license: 'ELC-2024-0089',
-      contact: 'Lisa Chen',
-      email: 'lisa@powercorp.com',
-      trade: 'Electrical',
-      workers: 34,
-      status: 'Active'
-    }
-  ]);
-
-  const [users] = useState([
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      email: 'sarah
+export default Administration;
