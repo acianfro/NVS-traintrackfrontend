@@ -17,9 +17,9 @@ const WorkerOnboarding = React.lazy(() =>
   })
 );
 
-const WorkerProfiles = React.lazy(() => 
-  import('./components/workers/WorkerProfiles').catch(() => {
-    console.error('Failed to load WorkerProfiles component');
+const TestWorker = React.lazy(() => 
+  import('./components/workers/TestWorker').catch(() => {
+    console.error('Failed to load TestWorker component');
     return { default: () => <div>Error loading Worker Profiles. Please refresh the page.</div> };
   })
 );
@@ -162,7 +162,7 @@ function App() {
                           path="/workers/profiles" 
                           element={
                             <ErrorBoundary>
-                              <WorkerProfiles />
+                              <TestWorker />
                             </ErrorBoundary>
                           } 
                         />
