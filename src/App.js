@@ -17,35 +17,23 @@ function App() {
     <Router>
       <div className="app">
         {user ? (
-          // Logged in - show dashboard (simple for now)
-          <div style={{ 
-            padding: '40px', 
-            fontFamily: 'Arial, sans-serif',
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            minHeight: '100vh',
-            color: 'white'
-          }}>
-            <h1>🏗️ Train-Track Dashboard</h1>
-            <h2>Welcome, {user.name}!</h2>
-            <p>Role: {user.title}</p>
-            <button 
-              onClick={logout}
-              style={{
-                padding: '12px 24px',
-                background: 'rgba(255,255,255,0.2)',
-                color: 'white',
-                border: '1px solid rgba(255,255,255,0.3)',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                marginTop: '20px'
-              }}
-            >
-              Logout
-            </button>
+          <div style={{ padding: '20px', background: '#fff', minHeight: '100vh' }}>
+            <div style={{ background: '#667eea', color: 'white', padding: '20px', borderRadius: '8px' }}>
+              <h1>🏗️ Train-Track Dashboard</h1>
+              <p>Welcome, {user.name}! ({user.title})</p>
+              <button onClick={logout} style={{ padding: '10px 20px', marginTop: '10px' }}>
+                Logout
+              </button>
+            </div>
+            
+            <div style={{ marginTop: '20px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+              <h2>Dashboard Content</h2>
+              <p>✅ Login working</p>
+              <p>✅ User data: {user.name}</p>
+              <p>🔄 Ready to add navigation components</p>
+            </div>
           </div>
         ) : (
-          // Not logged in - show login
           <Routes>
             <Route path="/login" element={<Login onLogin={login} />} />
             <Route path="/" element={<Navigate to="/login" replace />} />
