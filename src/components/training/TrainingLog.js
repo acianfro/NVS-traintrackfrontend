@@ -1,4 +1,4 @@
-// components/training/TrainingLog.jsx
+// components/training/TrainingLog.js
 import React, { useState } from 'react';
 
 const TrainingLog = () => {
@@ -181,6 +181,7 @@ const TrainingLog = () => {
     setShowSuccess(false);
   };
 
+  // Render success screen
   if (showSuccess) {
     return (
       <div className="training-log">
@@ -226,6 +227,7 @@ const TrainingLog = () => {
     );
   }
 
+  // Render main training log interface
   return (
     <div className="training-log">
       <div className="page-header">
