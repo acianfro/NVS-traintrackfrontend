@@ -307,6 +307,57 @@ const WorkerOnboarding = () => {
           </div>
         </div>
 
+        {/* Training Records Section - MOVED INSIDE THE FORM */}
+        <div className="form-section">
+          <div className="section-header">
+            <h2>Training Records and Current Certifications</h2>
+            <button
+              type="button"
+              onClick={() => setShowAddTraining(true)}
+              className="btn btn-primary"
+            >
+              + Add Training
+            </button>
+          </div>
+
+          <div className="training-records">
+            {trainingRecords.length === 0 ? (
+              <div className="no-training">
+                <p>No training records added yet.</p>
+                <p>Click "Add Training" to record completed certifications.</p>
+              </div>
+            ) : (
+              trainingRecords.map(record => (
+                <div key={record.id} className="training-record-card">
+                  <div className="training-info">
+                    <h4>{record.trainingName}</h4>
+                    <div className="training-details">
+                      <span>Completed: {new Date(record.completionDate).toLocaleDateString()}</span>
+                      {record.expirationDate && (
+                        <span>Expires: {new Date(record.expirationDate).toLocaleDateString()}</span>
+                      )}
+                      {record.trainer && <span>Trainer: {record.trainer}</span>}
+                      {record.location && <span>Location: {record.location}</span>}
+                    </div>
+                  </div>
+                  <div className="training-status">
+                    <span className={`status-badge ${record.status}`}>
+                      {record.status === 'valid' ? '✓ Valid' : record.status}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => removeTrainingRecord(record.id)}
+                      className="btn btn-danger btn-sm"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
         {/* Add Training Modal */}
         {showAddTraining && (
           <div className="modal-overlay">
@@ -500,52 +551,3 @@ const WorkerOnboarding = () => {
 };
 
 export default WorkerOnboarding;
-
-        <div className="form-section">
-          <div className="section-header">
-            <h2>Training Records and Current Certifications</h2>
-            <button
-              type="button"
-              onClick={() => setShowAddTraining(true)}
-              className="btn btn-primary"
-            >
-              + Add Training
-            </button>
-          </div>
-
-          <div className="training-records">
-            {trainingRecords.length === 0 ? (
-              <div className="no-training">
-                <p>No training records added yet.</p>
-                <p>Click "Add Training" to record completed certifications.</p>
-              </div>
-            ) : (
-              trainingRecords.map(record => (
-                <div key={record.id} className="training-record-card">
-                  <div className="training-info">
-                    <h4>{record.trainingName}</h4>
-                    <div className="training-details">
-                      <span>Completed: {new Date(record.completionDate).toLocaleDateString()}</span>
-                      {record.expirationDate && (
-                        <span>Expires: {new Date(record.expirationDate).toLocaleDateString()}</span>
-                      )}
-                      {record.trainer && <span>Trainer: {record.trainer}</span>}
-                      {record.location && <span>Location: {record.location}</span>}
-                    </div>
-                  </div>
-                  <div className="training-status">
-                    <span className={`status-badge ${record.status}`}>
-                      {record.status === 'valid' ? '✓ Valid' : record.status}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => removeTrainingRecord(record.id)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
