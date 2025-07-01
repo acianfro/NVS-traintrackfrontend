@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import WorkerOnboarding from './components/workers/WorkerOnboarding';
+import WorkerProfiles from './components/workers/WorkerProfiles';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 
@@ -21,13 +23,13 @@ function App() {
     <Router>
       <div className="app">
         {user ? (
-          <div className="app-layout" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <div className="app-layout">
             <Navbar 
               user={user} 
               logout={logout}
               toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
             />
-            <div className="app-content" style={{ display: 'flex', flex: 1 }}>
+            <div className="app-content" style={{ display: 'flex' }}>
               <Sidebar 
                 isOpen={sidebarOpen}
                 userRole={user.role}
@@ -37,11 +39,12 @@ function App() {
                 flex: 1, 
                 padding: '24px', 
                 background: '#f8fafc',
-                marginLeft: sidebarOpen ? '280px' : '0',
-                transition: 'margin-left 0.3s ease'
+                minHeight: 'calc(100vh - 64px)'
               }}>
                 <Routes>
                   <Route path="/dashboard" element={<Dashboard user={user} />} />
+                  <Route path="/workers/onboard" element={<WorkerOnboarding />} />
+                  <Route path="/workers/profiles" element={<WorkerProfiles />} />
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 </Routes>
               </main>
