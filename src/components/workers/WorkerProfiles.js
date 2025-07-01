@@ -134,19 +134,13 @@ const WorkerProfiles = () => {
     setShowWorkerDetail(true);
   };
 
-  const handleBackToProfiles = () => {
-    setShowWorkerDetail(false);
-    setSelectedWorker(null);
-  };
-
-  // Render detail view if a worker is selected
   if (showWorkerDetail && selectedWorker) {
     return (
       <div className="worker-profiles">
         <div className="detail-view">
           <button 
             className="back-button" 
-            onClick={handleBackToProfiles}
+            onClick={() => setShowWorkerDetail(false)}
           >
             ← Back to Worker Profiles
           </button>
@@ -255,7 +249,6 @@ const WorkerProfiles = () => {
     );
   }
 
-  // Render main profiles view
   return (
     <div className="worker-profiles">
       <div className="page-header">
