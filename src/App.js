@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/auth/Login';
+import Dashboard from './components/dashboard/Dashboard';
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const login = (userData) => {
     setUser(userData);
@@ -17,20 +21,30 @@ function App() {
     <Router>
       <div className="app">
         {user ? (
-          <div style={{ padding: '20px', background: '#fff', minHeight: '100vh' }}>
-            <div style={{ background: '#667eea', color: 'white', padding: '20px', borderRadius: '8px' }}>
-              <h1>🏗️ Train-Track Dashboard</h1>
-              <p>Welcome, {user.name}! ({user.title})</p>
-              <button onClick={logout} style={{ padding: '10px 20px', marginTop: '10px' }}>
-                Logout
-              </button>
-            </div>
-            
-            <div style={{ marginTop: '20px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-              <h2>Dashboard Content</h2>
-              <p>✅ Login working</p>
-              <p>✅ User data: {user.name}</p>
-              <p>🔄 Ready to add navigation components</p>
+          <div className="app-layout" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <Navbar 
+              user={user} 
+              logout={logout}
+              toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+            />
+            <div className="app-content" style={{ display: 'flex', flex: 1 }}>
+              <Sidebar 
+                isOpen={sidebarOpen}
+                userRole={user.role}
+                onClose={() => setSidebarOpen(false)}
+              />
+              <main className="main-content" style={{ 
+                flex: 1, 
+                padding: '24px', 
+                background: '#f8fafc',
+                marginLeft: sidebarOpen ? '280px' : '0',
+                transition: 'margin-left 0.3s ease'
+              }}>
+                <Routes>
+                  <Route path="/dashboard" element={<Dashboard user={user} />} />
+                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                </Routes>
+              </main>
             </div>
           </div>
         ) : (
