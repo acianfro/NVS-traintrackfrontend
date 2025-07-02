@@ -113,9 +113,9 @@ function App() {
                     <ErrorBoundary>
                       <Routes>
                         <Route path="/dashboard" element={<Dashboard user={user} />} />
-                        <Route path="/workers/onboard" element={<WorkerOnboarding />} />
-                        <Route path="/workers/profiles" element={<WorkerProfiles />} />
-                        <Route path="/training/log" element={<TrainingLog />} />
+                        <Route path="/onboard" element={<WorkerOnboarding />} />
+                        <Route path="/profiles" element={<WorkerProfiles />} />
+                        <Route path="/log" element={<TrainingLog />} />
                         <Route path="/reports" element={<Reports />} />
                         <Route path="/admin" element={<Administration userRole={user.role} />} />
                         <Route path="/" element={<Navigate to="/dashboard" replace />} />
