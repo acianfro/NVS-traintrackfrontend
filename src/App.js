@@ -10,42 +10,42 @@ import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 
 // Lazy load components that might have issues
-const WorkerOnboarding = React.lazy(() => 
+const WorkerOnboarding = React.lazy(() =>
   import('./components/workers/WorkerOnboarding').catch(() => {
     console.error('Failed to load WorkerOnboarding component');
     return { default: () => <div>Error loading Worker Onboarding. Please refresh the page.</div> };
   })
 );
 
-const WorkerProfiles = React.lazy(() => 
+const WorkerProfiles = React.lazy(() =>
   import('./components/workers/WorkerProfiles').catch(() => {
     console.error('Failed to load WorkerProfiles component');
     return { default: () => <div>Error loading Worker Profiles. Please refresh the page.</div> };
   })
 );
 
-const TrainingLog = React.lazy(() => 
+const TrainingLog = React.lazy(() =>
   import('./components/training/TrainingLog').catch(() => {
     console.error('Failed to load TrainingLog component');
     return { default: () => <div>Error loading Training Log. Please refresh the page.</div> };
   })
 );
 
-const PublicPortal = React.lazy(() => 
+const PublicPortal = React.lazy(() =>
   import('./components/public/PublicPortal').catch(() => {
     console.error('Failed to load PublicPortal component');
     return { default: () => <div>Error loading Public Portal. Please refresh the page.</div> };
   })
 );
 
-const Reports = React.lazy(() => 
+const Reports = React.lazy(() =>
   import('./components/reports/Reports').catch(() => {
     console.error('Failed to load Reports component');
     return { default: () => <div>Error loading Reports. Please refresh the page.</div> };
   })
 );
 
-const Administration = React.lazy(() => 
+const Administration = React.lazy(() =>
   import('./components/admin/Administration').catch(() => {
     console.error('Failed to load Administration component');
     return { default: () => <div>Error loading Administration. Please refresh the page.</div> };
@@ -135,82 +135,44 @@ function App() {
           <div className="app">
             {user ? (
               <div className="app-layout">
-                <Navbar 
-                  user={user} 
+                <Navbar
+                  user={user}
                   logout={logout}
                   toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
                 />
                 <div className="app-content">
-                  <Sidebar 
+                  <Sidebar
                     isOpen={sidebarOpen}
                     userRole={user.role}
                     onClose={() => setSidebarOpen(false)}
                   />
                   <main className="main-content">
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Routes>
-                        <Route path="/dashboard" element={<Dashboard user={user} />} />
-                        <Route 
-                          path="/workers/onboard" 
-                          element={
-                            <ErrorBoundary>
-                              <WorkerOnboarding />
-                            </ErrorBoundary>
-                          } 
-                        />
-                        <Route 
-                          path="/workers/profiles" 
-                          element={
-                            <ErrorBoundary>
-                              <WorkerProfiles />
-                            </ErrorBoundary>
-                          } 
-                        />
-                        <Route 
-                          path="/training/log" 
-                          element={
-                            <ErrorBoundary>
-                              <TrainingLog />
-                            </ErrorBoundary>
-                          } 
-                        />
-                        <Route 
-                          path="/reports" 
-                          element={
-                            <ErrorBoundary>
-                              <Reports />
-                            </ErrorBoundary>
-                          } 
-                        />
-                        <Route 
-                          path="/admin" 
-                          element={
-                            <ErrorBoundary>
-                              <Administration userRole={user.role} />
-                            </ErrorBoundary>
-                          } 
-                        />
-                        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                      </Routes>
-                    </Suspense>
+                    <ErrorBoundary>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Routes>
+                          <Route path="/dashboard" element={<Dashboard user={user} />} />
+                          <Route path="/workers/onboard" element={<WorkerOnboarding />} />
+                          <Route path="/workers/profiles" element={<WorkerProfiles />} />
+                          <Route path="/training/log" element={<TrainingLog />} />
+                          <Route path="/reports" element={<Reports />} />
+                          <Route path="/admin" element={<Administration userRole={user.role} />} />
+                          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                        </Routes>
+                      </Suspense>
+                    </ErrorBoundary>
                   </main>
                 </div>
               </div>
             ) : (
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                  <Route 
-                    path="/public" 
-                    element={
-                      <ErrorBoundary>
-                        <PublicPortal />
-                      </ErrorBoundary>
-                    } 
-                  />
-                  <Route path="/login" element={<Login onLogin={login} />} />
-                  <Route path="/" element={<Navigate to="/login" replace />} />
-                </Routes>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    <Route path="/public" element={<PublicPortal />} />
+                    <Route path="/login" element={<Login onLogin={login} />} />
+                    <Route path="/" element={<Navigate to="/login" replace />} />
+                  </Routes>
+                </Suspense>
+              </ErrorBoundary>
             )}
           </div>
         </Router>
