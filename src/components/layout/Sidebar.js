@@ -16,7 +16,7 @@ const Sidebar = ({ isOpen, userRole, onClose }) => {
           roles: ['admin', 'site_manager', 'corp_manager', 'contractor']
         },
         {
-          path: '/workers/profiles',
+          path: '/profiles',
           icon: '👥',
           label: 'Worker Profiles',
           roles: ['admin', 'site_manager', 'corp_manager', 'contractor']
@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, userRole, onClose }) => {
       section: 'Training Management',
       items: [
         {
-          path: '/workers/onboard',
+          path: '/onboard',
           icon: '👤',
           label: 'Add Worker',
           roles: ['admin', 'site_manager', 'contractor']
