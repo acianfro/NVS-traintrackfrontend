@@ -39,7 +39,7 @@ body {
 .main-content {
   flex: 1;
   padding: 1.5rem;
-  margin-left: 280px;
+  margin-left: 240px; /* FIXED: Reduced from 280px to 240px */
   min-height: calc(100vh - 64px);
   background-color: #f7fafc;
 }
@@ -1573,87 +1573,7 @@ body {
   animation: spin 1s linear infinite;
 }
 
-/* ===== RESPONSIVE DESIGN FOR PUBLIC PORTAL ===== */
-@media (max-width: 768px) {
-  .public-content {
-    padding: 2rem 1rem;
-  }
-  
-  .header-content {
-    padding: 1rem;
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-  
-  .intro-section h2 {
-    font-size: 2rem;
-  }
-  
-  .verification-form,
-  .quick-access-card,
-  .info-section,
-  .footer-section {
-    padding: 1.5rem;
-  }
-  
-  .result-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .verification-status {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .certification-item {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .cert-status {
-    margin-left: 0;
-    align-self: flex-start;
-  }
-  
-  .result-footer {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-  
-  .qr-section {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .url-share {
-    flex-direction: column;
-  }
-  
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .public-content {
-    padding: 1rem 0.5rem;
-  }
-  
-  .intro-section {
-    margin-bottom: 2rem;
-  }
-  
-  .intro-section h2 {
-    font-size: 1.5rem;
-  }
-  
-  .intro-icon {
-    font-size: 3rem;
-  }
-}
+/* ===== LOGIN STYLES ===== */
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -1777,15 +1697,6 @@ body {
   opacity: 0.9;
 }
 
-.error-message {
-  background: #fed7d7;
-  color: #9b2c2c;
-  padding: 0.75rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  border: 1px solid #feb2b2;
-}
-
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1024px) {
   .login-content {
@@ -1879,6 +1790,68 @@ body {
   .demo-buttons {
     flex-direction: column;
   }
+  
+  /* PUBLIC PORTAL RESPONSIVE */
+  .public-content {
+    padding: 2rem 1rem;
+  }
+  
+  .header-content {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .intro-section h2 {
+    font-size: 2rem;
+  }
+  
+  .verification-form,
+  .quick-access-card,
+  .info-section,
+  .footer-section {
+    padding: 1.5rem;
+  }
+  
+  .result-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .verification-status {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .certification-item {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .cert-status {
+    margin-left: 0;
+    align-self: flex-start;
+  }
+  
+  .result-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .qr-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .url-share {
+    flex-direction: column;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1926,6 +1899,23 @@ body {
   
   .login-form-container {
     padding: 1.5rem;
+  }
+  
+  /* PUBLIC PORTAL MOBILE */
+  .public-content {
+    padding: 1rem 0.5rem;
+  }
+  
+  .intro-section {
+    margin-bottom: 2rem;
+  }
+  
+  .intro-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .intro-icon {
+    font-size: 3rem;
   }
 }
 
