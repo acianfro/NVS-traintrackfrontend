@@ -1,56 +1,19 @@
-// App.jsx - Main Application Component
-import React, { useState, useEffect, Suspense } from 'react';
+// App.jsx - Main Application Component (Direct Imports Version)
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
-// Import components with error boundaries
+// Direct imports instead of lazy loading for debugging
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
-
-// Lazy load components that might have issues
-const WorkerOnboarding = React.lazy(() =>
-  import('./components/workers/WorkerOnboarding').catch(() => {
-    console.error('Failed to load WorkerOnboarding component');
-    return { default: () => <div>Error loading Worker Onboarding. Please refresh the page.</div> };
-  })
-);
-
-const WorkerProfiles = React.lazy(() =>
-  import('./components/workers/WorkerProfiles').catch(() => {
-    console.error('Failed to load WorkerProfiles component');
-    return { default: () => <div>Error loading Worker Profiles. Please refresh the page.</div> };
-  })
-);
-
-const TrainingLog = React.lazy(() =>
-  import('./components/training/TrainingLog').catch(() => {
-    console.error('Failed to load TrainingLog component');
-    return { default: () => <div>Error loading Training Log. Please refresh the page.</div> };
-  })
-);
-
-const PublicPortal = React.lazy(() =>
-  import('./components/public/PublicPortal').catch(() => {
-    console.error('Failed to load PublicPortal component');
-    return { default: () => <div>Error loading Public Portal. Please refresh the page.</div> };
-  })
-);
-
-const Reports = React.lazy(() =>
-  import('./components/reports/Reports').catch(() => {
-    console.error('Failed to load Reports component');
-    return { default: () => <div>Error loading Reports. Please refresh the page.</div> };
-  })
-);
-
-const Administration = React.lazy(() =>
-  import('./components/admin/Administration').catch(() => {
-    console.error('Failed to load Administration component');
-    return { default: () => <div>Error loading Administration. Please refresh the page.</div> };
-  })
-);
+import WorkerOnboarding from './components/workers/WorkerOnboarding';
+import WorkerProfiles from './components/workers/WorkerProfiles';
+import TrainingLog from './components/training/TrainingLog';
+import PublicPortal from './components/public/PublicPortal';
+import Reports from './components/reports/Reports';
+import Administration from './components/admin/Administration';
 
 // Mock authentication context
 const AuthContext = React.createContext();
@@ -148,30 +111,26 @@ function App() {
                   />
                   <main className="main-content">
                     <ErrorBoundary>
-                      <Suspense fallback={<LoadingSpinner />}>
-                        <Routes>
-                          <Route path="/dashboard" element={<Dashboard user={user} />} />
-                          <Route path="/workers/onboard" element={<WorkerOnboarding />} />
-                          <Route path="/workers/profiles" element={<WorkerProfiles />} />
-                          <Route path="/training/log" element={<TrainingLog />} />
-                          <Route path="/reports" element={<Reports />} />
-                          <Route path="/admin" element={<Administration userRole={user.role} />} />
-                          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                        </Routes>
-                      </Suspense>
+                      <Routes>
+                        <Route path="/dashboard" element={<Dashboard user={user} />} />
+                        <Route path="/workers/onboard" element={<WorkerOnboarding />} />
+                        <Route path="/workers/profiles" element={<WorkerProfiles />} />
+                        <Route path="/training/log" element={<TrainingLog />} />
+                        <Route path="/reports" element={<Reports />} />
+                        <Route path="/admin" element={<Administration userRole={user.role} />} />
+                        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                      </Routes>
                     </ErrorBoundary>
                   </main>
                 </div>
               </div>
             ) : (
               <ErrorBoundary>
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Routes>
-                    <Route path="/public" element={<PublicPortal />} />
-                    <Route path="/login" element={<Login onLogin={login} />} />
-                    <Route path="/" element={<Navigate to="/login" replace />} />
-                  </Routes>
-                </Suspense>
+                <Routes>
+                  <Route path="/public" element={<PublicPortal />} />
+                  <Route path="/login" element={<Login onLogin={login} />} />
+                  <Route path="/" element={<Navigate to="/login" replace />} />
+                </Routes>
               </ErrorBoundary>
             )}
           </div>
