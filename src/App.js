@@ -118,6 +118,7 @@ function App() {
                         <Route path="/log" element={<TrainingLog />} />
                         <Route path="/reports" element={<Reports />} />
                         <Route path="/admin" element={<Administration userRole={user.role} />} />
+                        <Route path="/public" element={<PublicPortal />} />
                         <Route path="/" element={<Navigate to="/dashboard" replace />} />
                       </Routes>
                     </ErrorBoundary>
