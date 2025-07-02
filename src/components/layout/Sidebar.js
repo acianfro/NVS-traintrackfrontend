@@ -33,7 +33,7 @@ const Sidebar = ({ isOpen, userRole, onClose }) => {
           roles: ['admin', 'site_manager', 'contractor']
         },
         {
-          path: '/training/log',
+          path: '/log',
           icon: '📝',
           label: 'Log Training',
           roles: ['admin', 'site_manager', 'contractor']
